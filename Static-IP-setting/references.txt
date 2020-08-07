@@ -1,0 +1,15 @@
+한글변환 우분투 16.04 version
+
+https://oboki.net/workspace/system/linux/ubuntu-16-04-%EB%B2%84%EC%A0%84-%ED%95%9C%EA%B8%80-%EC%84%A4%EC%A0%95/
+
+우분투에서 IP 고정
+https://codedosa.com/1029
+
+윈도우에서 IP 고정
+https://blessedme.tistory.com/11
+
+우분투에서 sudo 실행불가 에러 해결
+https://blog.illustudio.co.kr/2017/03/02/%EC%9A%B0%EB%B6%84%ED%88%AC-sudo-unable-resolve-host-%EC%97%90%EB%9F%AC-%EB%A9%94%EC%8B%9C%EC%A7%80-%ED%95%B4%EA%B2%B0/
+
+네트워킹 서비스 다시 시작
+https://qastack.kr/ubuntu/230698/how-to-restart-the-networking-service
