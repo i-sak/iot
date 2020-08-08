@@ -13,3 +13,9 @@ https://blog.illustudio.co.kr/2017/03/02/%EC%9A%B0%EB%B6%84%ED%88%AC-sudo-unable
 
 네트워킹 서비스 다시 시작
 https://qastack.kr/ubuntu/230698/how-to-restart-the-networking-service
+
+네트워크 인터페이스 설정
+https://tradeoff81.tistory.com/5
+- 네트워크 고정 IP 변경
+- 재부팅시 wlan0 세팅하도록 ifdown-up
+
