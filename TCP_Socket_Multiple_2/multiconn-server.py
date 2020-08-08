@@ -35,7 +35,7 @@ def threaded(client_socket, addr):
     client_socket.close() 
 
 
-HOST = '127.0.0.1'
+HOST = '192.168.0.4'
 PORT = 9999
 
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM) 

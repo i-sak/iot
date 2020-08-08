@@ -19,3 +19,7 @@ https://tradeoff81.tistory.com/5
 - 네트워크 고정 IP 변경
 - 재부팅시 wlan0 세팅하도록 ifdown-up
 
+네트워크 고정 IP 설정하기
+https://freestrokes.tistory.com/39
+
+
