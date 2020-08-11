@@ -2,7 +2,7 @@
 
 import socket
 
-HOST = '192.168.0.4'
+HOST = '192.168.219.111'
 PORT = 11211
 
 client_socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM) 
