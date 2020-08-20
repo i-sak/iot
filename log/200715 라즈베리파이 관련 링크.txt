@@ -1,0 +1,34 @@
+라즈베리파이 클라이언트로 구성하여 온도센서 데이터를 서버에...
+https://m.blog.naver.com/PostView.nhn?blogId=dnfla420&logNo=221569883355&proxyReferer=https:%2F%2Fwww.google.co.kr%2F
+
+미세먼지 측정 라즈베리 파이
+http://blog.naver.com/PostView.nhn?blogId=pdj2885&logNo=221467637822&parentCategoryNo=&categoryNo=88&viewDate=&isShowPopularPosts=true&from=search
+
+라즈베리파이 미세먼지 측정기 만들기
+https://geeksvoyage.com/raspberry%20pi/nova-sds011-for-pi/
+
+라즈베리파이 미세먼지 측정기 만들기
+https://nonaka.tistory.com/171
+
+라즈베리파이 가스 센서
+http://blog.naver.com/PostView.nhn?blogId=elepartsblog&logNo=221528526035
+
+라즈베리파이 유해가스관리시스템
+https://www.youtube.com/watch?v=5KlXTWyIz2M
+
+라즈베리파이 카메라 모듈
+http://www.3demp.com/community/boardDetails.php?cbID=233
+
+라즈베리파이 카메라
+https://inmile.tistory.com/17
+
+라즈베리파이 홈 서버 구축하기
+https://blog.rajephon.dev/2019/07/12/setup-raspberrypi-home-server/
+
+토이프로젝트 라즈베리파이 서버 만들기
+https://ryan-han.com/post/server/raspberry_server_1/
+
+라즈베리파이 홈서버구축하기
+https://oboki.net/workspace/system/raspberrypi/라즈베리-파이-4-apm-홈서버-구축하기-2/
+
+http://docs.lattepanda.com/content/1st_edition/os/

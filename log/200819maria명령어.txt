@@ -1,7 +1,8 @@
 # mariadb 명령어
 
 # 계정 생성
-
+# localhost로 계정을 생성하면 외부에서 접근이 불가능하다.
+# 따라서 'userid'@'%' 로 생성해야 한다.
 create user 'latte'@'localhost' identified by 'lattepanda';
 
 # 호스트 및 계정 보기
@@ -9,7 +10,6 @@ create user 'latte'@'localhost' identified by 'lattepanda';
 select host, user from user;
 
 # 권한 부여하기
-
 grant all privileges on mysql.* to 'latte'@'localhost';
 
 
