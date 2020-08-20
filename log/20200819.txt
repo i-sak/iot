@@ -1,0 +1,16 @@
+# mariadb 명령어
+
+# 계정 생성
+
+create user 'latte'@'localhost' identified by 'lattepanda';
+
+# 호스트 및 계정 보기
+
+select host, user from user;
+
+# 권한 부여하기
+
+grant all privileges on mysql.* to 'latte'@'localhost';
+
+
+
