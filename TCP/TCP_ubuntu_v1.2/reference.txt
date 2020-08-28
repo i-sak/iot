@@ -1,0 +1,17 @@
+Ubuntu 리눅스에서 파이썬 설치하기
+http://w3devlabs.net/wp/?p=16901
+
+ubuntu에서 python pip 인스톨하기
+http://w3devlabs.net/wp/?p=24350
+
+우분투에서 파이썬 환경 구축 (파이선3설치, pip 설치)
+https://austcoconut.tistory.com/entry/%EB%AC%B4%EC%9E%91%EC%A0%95-%EB%94%B0%EB%9D%BC-%ED%95%98%EA%B8%B0-LinuxUbuntu%EC%97%90%EC%84%9C-Python-%EA%B0%9C%EB%B0%9C-%ED%99%98%EA%B2%BD-%EA%B5%AC%EC%B6%95-python3-%EC%84%A4%EC%B9%98-pip-%EC%84%A4%EC%B9%98
+
+with표기 개선
+ttps://stackoverflow.com/questions/7447284/how-to-troubleshoot-an-attributeerror-exit-in-multiproccesing-in-python
+
+파이썬 소켓 프로그래밍
+https://realpython.com/python-sockets/
+
+파이썬 import thread 에러 해결 ->> pip install -U news-please
+https://github.com/fhamborg/news-please/issues/21

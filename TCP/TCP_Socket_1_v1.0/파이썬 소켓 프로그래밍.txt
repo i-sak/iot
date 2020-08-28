@@ -1,0 +1,5 @@
+파이썬 소켓 프로그래밍
+https://webnautes.tistory.com/1381
+
+파이썬 소켓 프로그래밍
+http://www.w3big.com/ko/python/python-socket.html
