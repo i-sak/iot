@@ -1,4 +1,4 @@
-# mariadb 명령어
+﻿# mariadb 명령어
 
 # 계정 생성
 # localhost로 계정을 생성하면 외부에서 접근이 불가능하다.
@@ -12,5 +12,20 @@ select host, user from user;
 # 권한 부여하기
 grant all privileges on mysql.* to 'latte'@'localhost';
 
+#[MySql] Mariadb, MYsql 사용자 권한주기 및 확인
+출처: https://postitforhooney.tistory.com/entry/MySql-Mariadb-MYsql-사용자-권한주기-및-확인 [PostIT]
 
+# MariaDB / 사용자 만들기, 사용자 삭제하기, 권한 부여하기, 권한 제거하기
+https://www.codingfactory.net/11336
 
+# mysql mariadb 기본 명령어
+https://m.blog.naver.com/PostView.nhn?blogId=colt357&logNo=221003387169&proxyReferer=https:%2F%2Fwww.google.com%2F
+
+# [MariaDB] 데이터베이스 생성 / 권한 부여 / 접속
+출처: https://ora-sysdba.tistory.com/entry/MariaDB-Maria-DB-데이터베이스-생성-권한-부여-접속 [Welcome To Ora-SYSDBA]
+
+# mariadb(mysql) 원격 접속하기.
+https://blog.dalso.org/it/1917
+
+# MYSQL(MariaDB)에서 외부접근이 되지않을때.(Feat. Can’t connect to MySQL server on ‘192.168.x.x'(10061)
+https://blog.dalso.org/it/4260
