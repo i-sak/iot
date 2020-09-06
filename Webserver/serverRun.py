@@ -18,7 +18,7 @@ def siginin() :
         if _id == "1" and _password == "1" :
             return render_template('menu.html')
         else :
-            return render_template('index.html'))
+            return render_template('index.html')
 
 host_addr = "0.0.0.0"
 port_num = "8080"
