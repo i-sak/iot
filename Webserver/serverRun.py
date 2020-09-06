@@ -21,7 +21,7 @@ def siginin() :
             return render_template('index.html')
 
 host_addr = "0.0.0.0"
-port_num = 80
+port_num = "8080"
 
 if __name__ == "__main__":
     app.run(host=host_addr, port=port_num, debug=True)
