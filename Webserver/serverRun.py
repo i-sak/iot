@@ -16,9 +16,9 @@ def siginin() :
         _id = request.form.get('_id')   # post로 보낼 경우, request.form.get으로 받고, get으로 보내는 경우 requst.args.get으로 받음
         _password = request.form.get('_password')
         if _id == "1" and _password == "1" :
-            return "login"
-        else :
             return render_template('menu.html')
+        else :
+            return render_template('index.html'))
 
 host_addr = "0.0.0.0"
 port_num = "8080"
