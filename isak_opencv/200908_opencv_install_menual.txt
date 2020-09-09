@@ -1,0 +1,20 @@
+# 참고 reference
+# opencv 설치 경로 
+http://www.3demp.com/community/boardDetails.php?cbID=235
+
+# 가장 긴 명령어
+pi@raspberrypi:~/Downloads/isak_opencv/opencv-3.4.3/build $ cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTAL_PREFIX=/usr/local ﻿-D WITH_TBB=OFF ﻿-D WITH_IPP=OFF ﻿-D WITH_1394=OFF ﻿-D BUILD_WITH_DEBUG_INFO=OFF ﻿-D BUILD_DOCS=OFF ﻿-D INSTALL_C_EXAMPLES=ON ﻿-D INSTALL_PYTHON_EXAMPLES=ON ﻿-D BUILD-EXAMPLES=OFF ﻿-D BUILD_TESTS=OFF ﻿-D BUILD_PERF_TESTS=OFF ﻿-D ENABLE_NEON=ON ﻿-D ENABLE_VFPV3=ON -D WITH_QT=OFF -D WITH_GTK=ON -D WITH_OPENGL=ON -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-3.4.3/modules -D WITH_V4L=ON -D WITH_FFMPEG=ON -D WITH_XINE=ON -D BUILD_NEW_PYTHON_SUPPORT=ON ../
+
+# opencv 얼굴 인식 예제
+https://blog.naver.com/roboholic84/221140338041
+
+# opency를 활용한 파이썬 기반 라즈베리파이 카메라 얼굴 인식
+https://blog.naver.com/roboholic84/221141959847
+https://blog.naver.com/roboholic84/221140338041
+https://m.blog.naver.com/zeta0807/221304976623
+
+# opencv-3.4.3/data/haarcascades/haarcascade_frontalface_alt.xml
+# 을 실습 코드에 인식시켜야 한다.
+
+# 얼굴인식(눈 인식) 프로그램 실행 경로
+pi@raspberrypi:~/Desktop/opencv/opencv-3.4.3/samples/python $ python3 myface.py
