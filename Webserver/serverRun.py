@@ -5,7 +5,7 @@ from flask import Flask, render_template, request
 app = Flask(__name__)	# Flask object Assign to app
 
 # 임시 cctv 리스트에 데이터 추가
-cctv_cap_list = ['123' , '456', '789']
+cctv_cap_list = []
 cctv_cap_list2 = []
 
 def getIp() :
@@ -61,10 +61,9 @@ def getCctv() :
     
     current_img = request.files['media']
     imageFileName = current_time + '.jpg'
-    current_img.save(os.path.join( './cctv_capture/', imageFileName))
+    current_img.save(os.path.join( 'static/cctv_img/', imageFileName)) # 파일 저장
     # image 파일 저장
-
-    cctv_cap_list2.append(current_img)
+    cctv_cap_list2.append(imageFileName)
     cctv_cap_list.append(current_time)
     return ""
 
