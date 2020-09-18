@@ -3,6 +3,8 @@
 from flask import Flask, render_template, request
 app = Flask(__name__)	# Flask object Assign to app
 
+# 임시 cctv 리스트에 데이터 추가
+
 def getIp() :
     return request.environ.get('HTTP_X_REAL_IP', request.remote_addr)
 
@@ -47,6 +49,13 @@ def dust_page() :
     _ip = getIp()
     return render_template('menu.html', _ip=_ip)
 
+# CCTV 클라이언트로부터의 값 얻기
+@app.route("/insertCctv", methods=['POST'])
+def getCctv() :    
+    request.values['is']    #
+    request.values['time'] # 측정된 시간
+    
+    return ""
 
 
 host_addr = "0.0.0.0"
