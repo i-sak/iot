@@ -4,7 +4,8 @@ from flask import Flask, render_template, request
 app = Flask(__name__)	# Flask object Assign to app
 
 # 임시 cctv 리스트에 데이터 추가
-cctv_cap_list = []
+cctv_cap_list = ['123' , '456', '789']
+#cctv_cap_
 
 def getIp() :
     return request.environ.get('HTTP_X_REAL_IP', request.remote_addr)
@@ -51,6 +52,7 @@ def dust_page() :
     return render_template('menu.html', _ip=_ip)
 
 # CCTV 클라이언트로부터의 값 얻기
+# 값 넣기
 @app.route("/insertCctv", methods=['POST'])
 def getCctv() :    
     request.values['is']    #

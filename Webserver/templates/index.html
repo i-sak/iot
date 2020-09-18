@@ -8,9 +8,6 @@
     <meta name="generator" content="Jekyll v4.1.1">
     <title>Signin · Iot server</title>
 
-    <!--
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sign-in/">
-    -->
     <!-- Bootstrap core CSS -->
     <link href="{{ url_for('static', filename='assets/dist/css/bootstrap.min.css')}}" rel="stylesheet">
 
@@ -36,20 +33,14 @@
   </head>
   <body class="text-center">
     <form class="form-signin" action="/signin" method="POST">
-        <!--<img class="mb-4" src="{{ url_for('static', filename='assets/brand/bootstrap-solid.svg') }}" alt="" width="72" height="72"> -->
+      
         <h1 class="font-weight-normal">Iot server page</h1>
         <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
         <label for="inputId" class="sr-only">ID</label>
         <input type="text" id="inputId" class="form-control" placeholder="ID" name="_id" required autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="_password" required>
-        <!--
-        <div class="checkbox mb-3">
-            <label>
-            <input type="checkbox" value="remember-me"> Remember me
-            </label>
-        </div>
-            -->
+        
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         <p class="mt-5 mb-3 text-muted">&copy; 2020 Hanium Anyang univ CS </p>
     </form>

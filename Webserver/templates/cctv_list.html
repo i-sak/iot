@@ -4,16 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CCTV_LIST</title>
+
+    <link href="{{  url_for('static', filename='css/menu.css') }}" rel="stylesheet">
 </head>
 <body>
 
-<table>
-{% for row in rows %}
-    <tbody>
-        <td>{{row}}</td>
-    </tbody>
-{% endfor %}
-</table>
+    <header>
+        <h3>CCTV_LIST</h3>
+    </header>
 
+    <section>
+        <table>
+            <thead>
+                <th>시간</th><th>캡처된 사진</th>
+            </thead>
+        {% for row in rows %}
+            <tbody>
+                <td>{{row}}</td>
+                <td></td>
+            </tbody>
+        {% endfor %}
+        </table>
+    </section>
 </body>
 </html>
