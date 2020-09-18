@@ -1,0 +1,30 @@
+* {margin: 0; padding: 0;}
+header {
+    text-align: center;
+    color: white;
+    background-color: #33bd10;
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+
+section {
+    padding: 5%;
+    text-align: center;
+}
+/* iot 버튼 */
+section .iot_button {
+    text-align: center;
+    display: inline-block;
+    width: 46%;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    border: 1px solid lightgray;
+    transition: background-color 0.5s;
+    margin:1%;
+}
+
+section .iot_button:hover {
+    background-color: lightgreen;
+}
+
+a:active, a:link, a:visited{text-decoration: none; color:black;}
