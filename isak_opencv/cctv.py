@@ -52,11 +52,25 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     vis = img.copy()
     draw_rects(vis, rects, (0, 255, 0))
 
+    # http post
     if len(rects) > 0 :
         print('사람인식')
-        params = {'is':1, 'time':time.strftime('%H:%M:%S')}
-        requests.post(url=cctv_url, data=params)
-        time.sleep(3)
+
+        cv2.imshow('capFrame', img) # 윈도우 프레임에 보임
+        # print('img:', img)
+        # print('img type:', type(img))
+        cv2.imwrite('temp.jpg', img) # image 저장하기
+
+        files = {'media' : open('temp.jpg', 'rb')}
+        params = {'is':1, 'time':time.strftime('%Y년%m월%d일%H시%M분%S초')}
+
+        try:
+            requests.post(url=cctv_url, data=params, files=files, timeout=10)
+        except requests.exceptions.Timeout:
+            print('http post Timeout')
+            pass
+
+        time.sleep(2)
 
 
     # eye 인식
