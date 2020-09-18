@@ -16,7 +16,7 @@
     <section>
         <table>
             <thead>
-                <th>시간</th><th>캡처된 사진</th>
+                <th>시간</th>
             </thead>
         {% for row in rows %}
             <tbody>
@@ -25,6 +25,18 @@
             </tbody>
         {% endfor %}
         </table>
+        <table>
+            <thead>
+                <th>캡처된 사진</th>
+            </thead>
+        {% for row2 in rows2 %}
+            <tbody>
+                <td>{{row2}}</td>
+                <td></td>
+            </tbody>
+        {% endfor %}
+        </table>
+        
     </section>
 </body>
 </html>
