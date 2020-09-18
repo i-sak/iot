@@ -4,6 +4,7 @@ from flask import Flask, render_template, request
 app = Flask(__name__)	# Flask object Assign to app
 
 # 임시 cctv 리스트에 데이터 추가
+cctv_cap_list = []
 
 def getIp() :
     return request.environ.get('HTTP_X_REAL_IP', request.remote_addr)
@@ -29,10 +30,10 @@ def siginin() :
             return render_template('index.html')
 
 
-@app.route("/cctv_page",  methods=['POST', 'GET'])
+@app.route("/cctv_list",  methods=['POST', 'GET'])
 def cctv_page() :
-    _ip = getIp()
-    return render_template('menu.html', _ip=_ip)
+    # 사람이 인식된 시간을 데이터로 보냄
+    return render_template('cctv_list.html', rows=cctv_cap_list)
 
 @app.route("/gas_page",  methods=['POST', 'GET'])
 def gas_page() :
@@ -53,10 +54,9 @@ def dust_page() :
 @app.route("/insertCctv", methods=['POST'])
 def getCctv() :    
     request.values['is']    #
-    request.values['time'] # 측정된 시간
-    
+    current_time = request.values['time'] # 측정된 시간
+    cctv_cap_list.append(current_time)
     return ""
-
 
 host_addr = "0.0.0.0"
 port_num = "8080"
