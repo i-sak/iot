@@ -8,6 +8,9 @@ app = Flask(__name__)	# Flask object Assign to app
 cctv_cap_list = []
 cctv_cap_list2 = []
 
+# 임시 온습도 리스트에 데이터 추가
+temp_cap_list = []
+
 def getIp() :
     return request.environ.get('HTTP_X_REAL_IP', request.remote_addr)
 
@@ -73,6 +76,27 @@ def insertGas() :
     request.values[''];
 
     return ""
+
+# 온습도 클라이언트로부터의 값 얻기
+# 값 넣기
+@app.route("/insertTemp", methods=['POST'])
+def insertTemp() :
+    
+    current_temp = request.values['temp'] # 온도
+    current_hum = request.values['hum'] # 습도
+    current_time = request.values['time'] # 측정된 시간
+    
+    #tempValueName = current_time
+    #current_value.save(os.path.join('static/temp_value/', tempValueName))
+    
+    
+    print(current_temp, current_hum, current_time)
+
+    temp_cap_list.append(current_time)
+    return ""
+
+
+
 
 host_addr = "0.0.0.0"
 port_num = "8080"
