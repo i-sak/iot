@@ -55,16 +55,23 @@ def dust_page() :
 # CCTV 클라이언트로부터의 값 얻기
 # 값 넣기
 @app.route("/insertCctv", methods=['POST'])
-def getCctv() :    
+def insertCctv() :
     request.values['is']    #
     current_time = request.values['time'] # 측정된 시간
-    
+
     current_img = request.files['media']
     imageFileName = current_time + '.jpg'
     current_img.save(os.path.join( 'static/cctv_img/', imageFileName)) # 파일 저장
     # image 파일 저장
     cctv_cap_list2.append(imageFileName)
     cctv_cap_list.append(current_time)
+    return ""
+
+@app.route("/insertGas", methods=['POST'])
+def insertGas() :
+
+    request.values[''];
+
     return ""
 
 host_addr = "0.0.0.0"
