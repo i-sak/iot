@@ -33,6 +33,9 @@ a:active, a:link, a:visited{text-decoration: none; color:black;}
 
 /* list page */
 
+table {
+    border : 1px solid lightgray;
+}
 thead {
     background-color : skyblue;
 }
