@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEMP_LIST</title>
+
+    <link href="{{  url_for('static', filename='css/menu.css') }}" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <h3>TEMP_LIST</h3>
+    </header>
+
+    <section>
+
+        <table>
+            <thead>
+                <th>TEMPERATURE & HUMIDITY</th>
+            </thead>
+        {% for row in rows %}
+            <tbody>
+                <!--<td><img style="width:75px; height: 75px;" src="/static/cctv_img/{{row.cc_image}}"></td>-->
+                <td>{{row.t_time}}</td>
+                <td>{{row.t_temp}}</td>
+                <td>{{row.t_humi}}</td>
+            </tbody>
+        {% endfor %}
+        </table>
+        
+    </section>
+</body>
+</html>

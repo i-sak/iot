@@ -1,19 +1,16 @@
-from vo import cctvVo
+from vo import cctvVo, tempVo
 
 import os
 from flask import Flask, render_template, request
 app = Flask(__name__)	# Flask object Assign to app
 
-
-# 임시 cctv 리스트에 데이터 추가
-cctvVo_list = []
-
-# 임시 온습도 리스트에 데이터 추가
-temp_cap_list = []
+cctvVo_list = [] # 임시 cctv 리스트에 데이터 추가
+tempVo_list = []  # 온습도 리스트에 데이터 추가
 
 def getIp() :
     return request.environ.get('HTTP_X_REAL_IP', request.remote_addr)
 
+#--------------------------------------------------------------------
 ## controller
 # main page
 @app.route("/")
@@ -35,70 +32,63 @@ def siginin() :
             return render_template('index.html')
 
 
+#--------------------------------------------------------------------
+# list page
+#--------------------------------------------------------------------
+# cctv_list page
 @app.route("/cctv_list",  methods=['POST', 'GET'])
-def cctv_page() :
-    # 사람이 인식된 시간을 데이터로 보냄
+def cctv_list() :
     return render_template('cctv_list.html', rows=cctvVo_list)
+
+@app.route("/tempe_list",  methods=['POST', 'GET'])
+def tempe_list() :
+    return render_template('temp_list.html', rows=tempVo_list)
 
 @app.route("/gas_page",  methods=['POST', 'GET'])
 def gas_page() :
     _ip = getIp()
     return render_template('menu.html', _ip=_ip)
 
-@app.route("/temperature_page",  methods=['POST', 'GET'])
-def temperature_page() :
-    _ip = getIp()
-    return render_template('menu.html', _ip=_ip)
 
 @app.route("/dust_page",  methods=['POST', 'GET'])
 def dust_page() :
     _ip = getIp()
     return render_template('menu.html', _ip=_ip)
 
-# CCTV 클라이언트로부터의 값 얻기
-# 값 넣기
+@app.route("/insertGas", methods=['POST'])
+def insertGas() :
+    request.values['']
+    return ""
+
+#--------------------------------------------------------------------
+# From CCTV client / insert
 @app.route("/insertCctv", methods=['POST', 'GET'])
 def insertCctv() :
-    request.values['is']    #
+    request.values['is']    # 테스트
 
-    current_time = request.values['time'] # 측정된 시간
-    current_img = request.files['media']
-    imageFileName = current_time + '.jpg'
+    current_time = request.values['time'] # 측정 시간
+    current_img = request.files['media']  # 이미지 
 
     # image 파일 저장
+    imageFileName = current_time + '.jpg'
     current_img.save(os.path.join( 'static/cctv_img/', imageFileName)) # 파일 저장
     
     instance = cctvVo.cctvVo(current_time, imageFileName)   # 객체에 저장
     cctvVo_list.append(instance)
     return ""
 
-@app.route("/insertGas", methods=['POST'])
-def insertGas() :
-
-    request.values['']
-
-    return ""
-
-# 온습도 클라이언트로부터의 값 얻기
-# 값 넣기
+# 온습도 클라이언트로부터의 값 얻어서 넣기
 @app.route("/insertTemp", methods=['POST'])
 def insertTemp() :
     
+    current_time = request.values['time'] # 측정된 시간
     current_temp = request.values['temp'] # 온도
     current_hum = request.values['hum'] # 습도
-    current_time = request.values['time'] # 측정된 시간
-    
-    #tempValueName = current_time
-    #current_value.save(os.path.join('static/temp_value/', tempValueName))
-    
-    
-    print(current_temp, current_hum, current_time)
 
-    temp_cap_list.append(current_time)
+    instance = tempVo.tempVo(current_time, current_temp, current_hum) # 객체에 저장
+    tempVo_list.append(instance)
     return ""
-
-
-
+#--------------------------------------------------------------------
 
 host_addr = "0.0.0.0"
 port_num = "8080"

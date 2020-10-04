@@ -30,3 +30,9 @@ section .iot_button:hover {
 
 a:active, a:link, a:visited{text-decoration: none; color:black;}
 
+
+/* list page */
+
+thead {
+    background-color : skyblue;
+}
