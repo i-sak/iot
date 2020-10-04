@@ -6,8 +6,7 @@ app = Flask(__name__)	# Flask object Assign to app
 
 
 # 임시 cctv 리스트에 데이터 추가
-cctv_cap_list = []
-cctv_cap_list2 = []
+cctvVo_list = []
 
 # 임시 온습도 리스트에 데이터 추가
 temp_cap_list = []
@@ -39,7 +38,7 @@ def siginin() :
 @app.route("/cctv_list",  methods=['POST', 'GET'])
 def cctv_page() :
     # 사람이 인식된 시간을 데이터로 보냄
-    return render_template('cctv_list.html', rows=cctv_cap_list, rows2=cctv_cap_list2)
+    return render_template('cctv_list.html', rows=cctvVo_list)
 
 @app.route("/gas_page",  methods=['POST', 'GET'])
 def gas_page() :
@@ -65,16 +64,12 @@ def insertCctv() :
     current_time = request.values['time'] # 측정된 시간
     current_img = request.files['media']
     imageFileName = current_time + '.jpg'
+
     # image 파일 저장
-    # current_img.save(os.path.join( 'static/cctv_img/', imageFileName)) # 파일 저장
+    current_img.save(os.path.join( 'static/cctv_img/', imageFileName)) # 파일 저장
     
-    instance = cctvVo.cctvVo(123, 456)
-    print("test 1 : ", instance.cc_image)
-    print("test 2 : ", instance.cc_time)
-
-    cctv_cap_list2.append(imageFileName)
-    cctv_cap_list.append(current_time)
-
+    instance = cctvVo.cctvVo(current_time, imageFileName)   # 객체에 저장
+    cctvVo_list.append(instance)
     return ""
 
 @app.route("/insertGas", methods=['POST'])
