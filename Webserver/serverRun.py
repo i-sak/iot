@@ -1,8 +1,9 @@
-# Flask module import
-# Flask, render_template
+from vo import cctvVo
+
 import os
 from flask import Flask, render_template, request
 app = Flask(__name__)	# Flask object Assign to app
+
 
 # 임시 cctv 리스트에 데이터 추가
 cctv_cap_list = []
@@ -57,23 +58,29 @@ def dust_page() :
 
 # CCTV 클라이언트로부터의 값 얻기
 # 값 넣기
-@app.route("/insertCctv", methods=['POST'])
+@app.route("/insertCctv", methods=['POST', 'GET'])
 def insertCctv() :
     request.values['is']    #
-    current_time = request.values['time'] # 측정된 시간
 
+    current_time = request.values['time'] # 측정된 시간
     current_img = request.files['media']
     imageFileName = current_time + '.jpg'
-    current_img.save(os.path.join( 'static/cctv_img/', imageFileName)) # 파일 저장
     # image 파일 저장
+    # current_img.save(os.path.join( 'static/cctv_img/', imageFileName)) # 파일 저장
+    
+    instance = cctvVo.cctvVo(123, 456)
+    print("test 1 : ", instance.cc_image)
+    print("test 2 : ", instance.cc_time)
+
     cctv_cap_list2.append(imageFileName)
     cctv_cap_list.append(current_time)
+
     return ""
 
 @app.route("/insertGas", methods=['POST'])
 def insertGas() :
 
-    request.values[''];
+    request.values['']
 
     return ""
 
