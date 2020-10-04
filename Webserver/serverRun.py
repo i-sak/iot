@@ -40,7 +40,7 @@ def siginin() :
 def cctv_list() :
     return render_template('cctv_list.html', rows=cctvVo_list)
 
-@app.route("/tempe_list",  methods=['POST', 'GET'])
+@app.route("/temp_list",  methods=['POST', 'GET'])
 def tempe_list() :
     return render_template('temp_list.html', rows=tempVo_list)
 
