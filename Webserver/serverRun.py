@@ -52,13 +52,15 @@ def tempe_list() :
     
     # converting to dict
     data_dict = dataFrame.to_dict()
-    
+
     # t_no
     # t_time
     # t_temp
     # t_humi
     tempVo_list.clear()
-    for i in len(data_dict['t_time']) :
+    print(  len(data_dict['t_time'] )  )
+    
+    for i in range( len( data_dict['t_time'] ) ) :
         obj = tempVo.tempVo(  data_dict['t_time'][ i ],  data_dict['t_temp'][ i ],  data_dict['t_humi'][ i ]  )
         tempVo_list.append(obj)
     
