@@ -55,9 +55,8 @@ def dust_page() :
     _ip = getIp()
     return render_template('menu.html', _ip=_ip)
 
-@app.route("/insertGas", methods=['POST'])
+@app.route("/insertGas", methods=['POST','GET'])
 def insertGas() :
-    request.values['']
     return ""
 
 #--------------------------------------------------------------------
