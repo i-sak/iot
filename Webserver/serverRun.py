@@ -52,17 +52,16 @@ def tempe_list() :
     
     # converting to dict
     data_dict = dataFrame.to_dict()
+    
     # t_no
     # t_time
     # t_temp
     # t_humi
+    tempVo_list.clear()
+    for i in len(data_dict['t_time']) :
+        obj = tempVo.tempVo(  data_dict['t_time'][ i ],  data_dict['t_temp'],  data_dict['t_humi']  )
+        tempVo_list.append(obj)
     
-    print(data_dict)
-    #print( dataFrame[0:] )
-
-    #for i in dataFrame[0:] :
-        #print( "[",  i , "]" )
-
     return render_template('temp_list.html', rows=tempVo_list)
 
 @app.route("/gas_page",  methods=['POST', 'GET'])
