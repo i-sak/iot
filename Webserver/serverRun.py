@@ -59,7 +59,7 @@ def tempe_list() :
     # t_humi
     tempVo_list.clear()
     for i in len(data_dict['t_time']) :
-        obj = tempVo.tempVo(  data_dict['t_time'][ i ],  data_dict['t_temp'],  data_dict['t_humi']  )
+        obj = tempVo.tempVo(  data_dict['t_time'][ i ],  data_dict['t_temp'][ i ],  data_dict['t_humi'][ i ]  )
         tempVo_list.append(obj)
     
     return render_template('temp_list.html', rows=tempVo_list)
