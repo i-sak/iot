@@ -1,7 +1,10 @@
-from vo import cctvVo, tempVo
 
-import os
+from vo import cctvVo, tempVo
 from flask import Flask, render_template, request
+from mariadb import dbConnection
+import os
+
+
 app = Flask(__name__)	# Flask object Assign to app
 
 cctvVo_list = [] # 임시 cctv 리스트에 데이터 추가
@@ -42,13 +45,30 @@ def cctv_list() :
 
 @app.route("/temp_list",  methods=['POST', 'GET'])
 def tempe_list() :
+
+    # database에서 값 꺼내기
+    db = dbConnection.dbConnection(host='192.168.219.111', id='latte', pw='lattepanda', db_name='test')
+    dataFrame = db.selectTemp()
+    
+    # converting to dict
+    data_dict = dataFrame.to_dict()
+    # t_no
+    # t_time
+    # t_temp
+    # t_humi
+    
+    print(data_dict)
+    #print( dataFrame[0:] )
+
+    #for i in dataFrame[0:] :
+        #print( "[",  i , "]" )
+
     return render_template('temp_list.html', rows=tempVo_list)
 
 @app.route("/gas_page",  methods=['POST', 'GET'])
 def gas_page() :
     _ip = getIp()
     return render_template('menu.html', _ip=_ip)
-
 
 @app.route("/dust_page",  methods=['POST', 'GET'])
 def dust_page() :
@@ -76,16 +96,25 @@ def insertCctv() :
     cctvVo_list.append(instance)
     return ""
 
-# 온습도 클라이언트로부터의 값 얻어서 넣기
-@app.route("/insertTemp", methods=['POST'])
+# From Temperature/Humidity 온습도 클라이언트로부터의 값 얻어서 넣기
+@app.route("/insertTemp", methods=['POST', 'GET'])
 def insertTemp() :
-    
-    current_time = request.values['time'] # 측정된 시간
-    current_temp = request.values['temp'] # 온도
-    current_hum = request.values['hum'] # 습도
+
+    # 본래 소스코드
+    #current_time = request.values['time'] # 측정된 시간
+    #current_temp = request.values['temp'] # 온도
+    #current_hum = request.values['hum'] # 습도
+
+    # test 소스코드
+    current_time = "20201015"
+    current_temp = 36.6
+    current_hum = 45.3
 
     instance = tempVo.tempVo(current_time, current_temp, current_hum) # 객체에 저장
     tempVo_list.append(instance)
+        
+    db = dbConnection.dbConnection(host='192.168.219.111', id='latte', pw='lattepanda', db_name='test')
+    db.insertTemp(current_time, current_temp, current_hum)
     return ""
 #--------------------------------------------------------------------
 
