@@ -78,6 +78,8 @@ def dust_page() :
 
 @app.route("/insertGas", methods=['POST','GET'])
 def insertGas() :
+    gas = request.args.get("gas");
+    print(gas)
     return ""
 
 #--------------------------------------------------------------------
