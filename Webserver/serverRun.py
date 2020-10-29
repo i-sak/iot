@@ -114,6 +114,7 @@ def insertTemp() :
     c_hum = request.values['hum'] # 습도
     c_sig1 = request.values['sig1'] #main sensor
     c_sig2 = request.values['sig2'] #main sensor
+    print(c_sig1, c_sig2)
     # test 소스코드
     #current_time = "20201015"
     #current_temp = 36.6
