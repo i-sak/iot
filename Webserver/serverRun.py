@@ -104,16 +104,17 @@ def insertCctv() :
 def insertTemp() :
 
     # 본래 소스코드
-    #current_time = request.values['time'] # 측정된 시간
-    #current_temp = request.values['temp'] # 온도
-    #current_hum = request.values['hum'] # 습도
-
+    c_time = request.values['time'] # 측정된 시간
+    c_temp = request.values['temp'] # 온도
+    c_hum = request.values['hum'] # 습도
+    c_sig1 = request.values['sig1'] #main sensor
+    c_sig2 = request.values['sig2'] #main sensor
     # test 소스코드
-    current_time = "20201015"
-    current_temp = 36.6
-    current_hum = 45.3
+    #current_time = "20201015"
+    #current_temp = 36.6
+    #current_hum = 45.3
 
-    instance = tempVo.tempVo(current_time, current_temp, current_hum) # 객체에 저장
+    instance = tempVo.tempVo(c_time, c_temp, c_hum) # 객체에 저장
     tempVo_list.append(instance)
         
     db = dbConnection.dbConnection(host='192.168.219.111', id='latte', pw='lattepanda', db_name='test')
