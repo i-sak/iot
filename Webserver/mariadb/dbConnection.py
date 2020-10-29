@@ -12,7 +12,7 @@ class dbConnection:
         self.conn.commit()
 
     def selectTemp(self):
-        sql = "SELECT * FROM `temperature` ORDER BY temp;"
+        sql = "SELECT * FROM `temperature` ORDER BY t_temp;"
         self.curs.execute(sql)
         
         result = self.curs.fetchall()
