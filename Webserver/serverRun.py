@@ -3,6 +3,7 @@ from vo import cctvVo, tempVo
 from flask import Flask, render_template, request
 from mariadb import dbConnection
 import os
+import datetime
 
 
 app = Flask(__name__)	# Flask object Assign to app
@@ -104,7 +105,9 @@ def insertCctv() :
 def insertTemp() :
 
     # 본래 소스코드
+    nowDatetime = now.strftime('%Y-%m-%d %H:%M:%S')
     c_time = request.values['time'] # 측정된 시간
+    c_time =nowDatetime         # imsi 현재시간
     c_temp = request.values['temp'] # 온도
     c_hum = request.values['hum'] # 습도
     c_sig1 = request.values['sig1'] #main sensor
