@@ -105,6 +105,8 @@ def insertCctv() :
 def insertTemp() :
 
     # 본래 소스코드
+    
+    now = datetime.datetime.now()
     nowDatetime = now.strftime('%Y-%m-%d %H:%M:%S')
     c_time = request.values['time'] # 측정된 시간
     c_time =nowDatetime         # imsi 현재시간
