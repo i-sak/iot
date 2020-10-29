@@ -118,7 +118,7 @@ def insertTemp() :
     tempVo_list.append(instance)
         
     db = dbConnection.dbConnection(host='192.168.219.111', id='latte', pw='lattepanda', db_name='test')
-    db.insertTemp(current_time, current_temp, current_hum)
+    db.insertTemp(c_time, c_temp, c_hum)
     return ""
 #--------------------------------------------------------------------
 
