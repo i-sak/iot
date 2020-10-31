@@ -5,7 +5,6 @@ from mariadb import dbConnection
 import os
 import datetime
 
-
 app = Flask(__name__)	# Flask object Assign to app
 
 cctvVo_list = [] # 임시 cctv 리스트에 데이터 추가
