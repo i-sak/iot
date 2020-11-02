@@ -7,6 +7,8 @@ import datetime
 
 app = Flask(__name__)	# Flask object Assign to app
 
+db = dbConnection.dbConnection(host='192.168.219.111', id='latte', pw='lattepanda', db_name='test')
+
 cctvVo_list = [] # 임시 cctv 리스트에 데이터 추가
 tempVo_list = []  # 온습도 리스트에 데이터 추가
 
@@ -19,9 +21,27 @@ def getIp() :
 @app.route("/")
 def index() :
 	return render_template('index.html')
+# 회원가입 Sign-Up
+@app.route("/signup")
+def signup():
+    return render_template('signup.html')
+# 회원가입 insert
+@app.route("/signupInsert", methods=['POST'])
+def signupInsert():
+    _id = request.values["_id"]
+    # _name = request.form.get('_name')
+    _name = request.values["_name"]
+    _password = request.values["_password"]
+
+    print(_id, _name, _password)
+    # 회원가입
+    db = dbConnection.dbConnection(host='192.168.219.111', id='latte', pw='lattepanda', db_name='test')
+    db.insertMember( _id, _name, _password )
+    return render_template('index.html')
+
 
 # signin [log-in]
-@app.route("/signin", methods=['POST', 'GET'])
+@app.route("/signin", methods=['POST'])
 def siginin() :
     if request.method == 'POST' :
          # post 로 보내면 request.form.get으로 받고,

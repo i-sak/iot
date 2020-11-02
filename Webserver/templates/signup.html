@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v4.1.1">
+    <title>Signup · Iot server</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static', filename='assets/dist/css/bootstrap.min.css')}}" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <!-- Custom styles for this template -->
+    <link href=" {{ url_for('static', filename='css/signin.css') }} " rel="stylesheet">
+
+  </head>
+  <body class="text-center">
+    <script>
+      function chkPassword2() {
+        if(document.getElementById("inputId").value == "") {
+          alert("ID(Email)을 입력하세요.");
+          document.getElementById("inputId").focus();
+          return;
+        } 
+        if (document.getElementById("inputName").value == "") {
+          alert("이름을 입력하세요.");
+          document.getElementById("inputName").focus();
+          return;
+        }
+        if (document.getElementById("inputPassword").value == "") {
+          alert("비밀번호를 입력하세요.");
+          document.getElementById("inputPassword").focus();
+          return;
+        }
+        if (document.getElementById("inputPassword2").value == "") {
+          alert("비밀번호를 입력하세요.");
+          document.getElementById("inputPassword2").focus();
+          return;
+        }
+        
+        var pass1 = document.getElementById('inputPassword').value;
+        var pass2 = document.getElementById('inputPassword2').value;
+        if (pass1 == pass2 ) document.signupInsertForm.submit();
+        else if (pass1 != pass2) alert("비밀번호를 확인하세요.");
+        
+      }
+    </script>
+
+    <form class="form-signin" action="/signupInsert" method="POST" name="signupInsertForm">
+        <a href="/" class="btn btn-lg btn-primary btn-block" type="submit">Back</a>  
+        <h1 class="font-weight-normal">Iot server page</h1>
+        <h1 class="h3 mb-3 font-weight-normal">Sign-up</h1>
+        <label for="inputId" class="sr-only">ID(Email)</label>
+        <input type="text" id="inputId" class="form-control" placeholder="ID(Email)" name="_id" required autofocus>
+        <label for="inputName" class="sr-only">Name</label>
+        <input type="text" id="inputName" class="form-control" placeholder="Name" name="_name" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="_password" required>
+        <label for="inputPassword2" class="sr-only">Password(Check)</label>
+        <input type="password" id="inputPassword2" class="form-control" placeholder="Password" name="_password2" required>
+        
+        <button onclick="chkPassword2()" class="btn btn-lg btn-primary btn-block" type="button">Sign Up</button>
+        <p class="mt-5 mb-3 text-muted">&copy; 2020 Hanium Anyang univ CS </p>
+    </form>
+    
+</body>
+</html>
