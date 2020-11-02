@@ -2,13 +2,16 @@
 from vo import cctvVo, tempVo
 from flask import Flask, render_template, request
 from mariadb import dbConnection
+from emailService import sendEmail
 import os
 import datetime
+
 
 app = Flask(__name__)	# Flask object Assign to app
 
 db = dbConnection.dbConnection(host='192.168.219.111', id='latte', pw='lattepanda', db_name='test')
 sessionId = ""
+slist = "isaac7263@naver.com, juhea0619@naver.com, itit2014@naver.com, rabbit3919@naver.com"
 cctvVo_list = [] # 임시 cctv 리스트에 데이터 추가
 tempVo_list = []  # 온습도 리스트에 데이터 추가
 
@@ -53,7 +56,8 @@ def siginin() :
         result = db.selectLoginMember(_id, _password)
         print(result[0]['COUNT(*)'])
         if ( result[0]['COUNT(*)'] == 1 ) :
-            sessionId = _id
+            sessionId = ""
+            sessionId += _id
             return render_template('menu.html', _ip=_ip)
         else :
             return render_template('index.html')
@@ -131,17 +135,26 @@ def insertTemp() :
     
     now = datetime.datetime.now()
     nowDatetime = now.strftime('%Y%m%d%H%M%S')
-    c_time = request.values['time'] # 측정된 시간
+    #c_time = request.values['time'] # 측정된 시간
     c_time =nowDatetime         # imsi 현재시간
-    c_temp = request.values['temp'] # 온도
-    c_hum = request.values['hum'] # 습도
-    c_sig1 = request.values['sig1'] #main sensor
-    c_sig2 = request.values['sig2'] #main sensor
-    print(c_sig1, c_sig2)
+    #c_temp = request.values['temp'] # 온도
+    #c_hum = request.values['hum'] # 습도
+    
+    #c_sig1 = request.values['sig1'] #main sensor
+    c_sig1 = 0
+    #c_sig2 = request.values['sig2'] #main sensor
+    #print(c_sig1, c_sig2)
+    print("sessionId:",sessionId)
+    if (c_sig1 == 0 ):
+        se = sendEmail.sendEmail()
+        se.setEmail(slist, "제목 : [알림]메인센서 이상", "내용 : [알림]메인센서 이상")
+        se.sendTo(slist)
+
     # test 소스코드
     #current_time = "20201015"
-    #current_temp = 36.6
-    #current_hum = 45.3
+
+    c_temp = 36.6
+    c_hum = 45.3
 
     instance = tempVo.tempVo(c_time, c_temp, c_hum) # 객체에 저장
     tempVo_list.append(instance)
