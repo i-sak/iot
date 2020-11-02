@@ -27,5 +27,14 @@ class dbConnection:
         self.curs.execute(sql)
         self.conn.commit()
 
+    # 로그인
+    def selectLoginMember(self, memail, mpassword) :
+        sql = """SELECT COUNT(*) FROM `member` WHERE m_email = "%s" AND m_password = "%s" ;"""% (memail, mpassword)
+        self.curs.execute(sql)
+        result = self.curs.fetchall()
+        #result = pd.DataFrame(result)
+        return result
+
+
         
 

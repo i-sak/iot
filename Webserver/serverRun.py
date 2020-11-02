@@ -8,7 +8,7 @@ import datetime
 app = Flask(__name__)	# Flask object Assign to app
 
 db = dbConnection.dbConnection(host='192.168.219.111', id='latte', pw='lattepanda', db_name='test')
-
+sessionId = ""
 cctvVo_list = [] # 임시 cctv 리스트에 데이터 추가
 tempVo_list = []  # 온습도 리스트에 데이터 추가
 
@@ -49,7 +49,11 @@ def siginin() :
         _id = request.form.get('_id')  
         _password = request.form.get('_password')
         _ip = getIp()
-        if _id == "1" and _password == "1" :
+
+        result = db.selectLoginMember(_id, _password)
+        print(result[0]['COUNT(*)'])
+        if ( result[0]['COUNT(*)'] == 1 ) :
+            sessionId = _id
             return render_template('menu.html', _ip=_ip)
         else :
             return render_template('index.html')
