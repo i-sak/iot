@@ -104,12 +104,6 @@ def dust_page() :
     _ip = getIp()
     return render_template('menu.html', _ip=_ip)
 
-@app.route("/insertGas", methods=['POST','GET'])
-def insertGas() :
-    gas = request.args.get("gas")
-    print(gas)
-    return ""
-
 #--------------------------------------------------------------------
 # From CCTV client / insert
 @app.route("/insertCctv", methods=['POST', 'GET'])
@@ -130,37 +124,50 @@ def insertCctv() :
 # From Temperature/Humidity 온습도 클라이언트로부터의 값 얻어서 넣기
 @app.route("/insertTemp", methods=['POST', 'GET'])
 def insertTemp() :
-
-    # 본래 소스코드
-    
     now = datetime.datetime.now()
     nowDatetime = now.strftime('%Y%m%d%H%M%S')
     #c_time = request.values['time'] # 측정된 시간
     c_time =nowDatetime         # imsi 현재시간
-    #c_temp = request.values['temp'] # 온도
-    #c_hum = request.values['hum'] # 습도
-    
-    #c_sig1 = request.values['sig1'] #main sensor
-    c_sig1 = 0
-    #c_sig2 = request.values['sig2'] #main sensor
-    #print(c_sig1, c_sig2)
-    print("sessionId:",sessionId)
-    if (c_sig1 == 0 ):
-        se = sendEmail.sendEmail()
-        se.setEmail(slist, "제목 : [알림]메인센서 이상", "내용 : [알림]메인센서 이상")
-        se.sendTo(slist)
+    c_temp = request.values['temp'] # 온도
+    c_hum = request.values['hum'] # 습도
+    c_sig1 = request.values['sig1'] #main sensor
+    c_sig2 = request.values['sig2'] #sub sensor
 
-    # test 소스코드
-    #current_time = "20201015"
+    # 이상감지
+    print(c_sig1, c_sig2)
+    if c_sig1 == "0" and c_sig2 == "1":
+        sendEmail.sendEmail("S:[온습도]메인센서 이상", "C:[온습도]메인센서 이상")
+    elif c_sig1 == "1"  and c_sig2 == "0" :
+        sendEmail.sendEmail("S:[온습도]서브센서 이상", "C:[온습도]서브센서 이상")
+    elif c_sig1 == "0" and c_sig2 == "0" :
+        sendEmail.sendEmail("S:[온습도]메인센서, 서브센서 이상", "C:[온습도]메인센서, 서브센서 이상")
 
-    c_temp = 36.6
-    c_hum = 45.3
-
-    instance = tempVo.tempVo(c_time, c_temp, c_hum) # 객체에 저장
-    tempVo_list.append(instance)
-        
-    db = dbConnection.dbConnection(host='192.168.219.111', id='latte', pw='lattepanda', db_name='test')
     db.insertTemp(c_time, c_temp, c_hum)
+    return ""
+
+@app.route("/insertGas", methods=['POST','GET'])
+def insertGas() :
+    now = datetime.datetime.now()
+    nowDatetime = now.strftime('%Y%m%d%H%M%S')
+    #c_time = request.values['time'] # 측정된 시간
+    c_time =nowDatetime         # imsi 현재시간
+    c_gas = request.values["gas"]
+    c_sig1 = request.values['flag1'] #main sensor
+    c_sig2 = request.values['flag2'] #sub sensor
+
+    # 이상감지
+    print(c_sig1, c_sig2)
+    if c_sig1 == "0" and c_sig2 == "1":
+        sendEmail.sendEmail("S:[Gas]메인센서 이상", "C:[Gas]메인센서 이상")
+    elif c_sig1 == "1"  and c_sig2 == "0" :
+        sendEmail.sendEmail("S:[Gas]서브센서 이상", "C:[Gas]서브센서 이상")
+    elif c_sig1 == "0" and c_sig2 == "0" :
+        sendEmail.sendEmail("S:[Gas]메인센서, 서브센서 이상", "C:[Gas]메인센서, 서브센서 이상")
+    elif c_sig1 =="2" :
+        sendEmail.sendEmail("S:[Gas]가스 누출 메인센서 감지", "C:[Gas]가스 누출 메인센서 감지")
+    elif c_sig2 =="2" :
+        sendEmail.sendEmail("S:[Gas]가스 누출 서브센서 감지", "C:[Gas]가스 누출 서브센서 감지")
+
     return ""
 #--------------------------------------------------------------------
 
