@@ -56,8 +56,6 @@ def siginin() :
         result = db.selectLoginMember(_id, _password)
         print(result[0]['COUNT(*)'])
         if ( result[0]['COUNT(*)'] == 1 ) :
-            sessionId = ""
-            sessionId += _id
             return render_template('menu.html', _ip=_ip)
         else :
             return render_template('index.html')
@@ -125,7 +123,7 @@ def insertCctv() :
 @app.route("/insertTemp", methods=['POST', 'GET'])
 def insertTemp() :
     now = datetime.datetime.now()
-    nowDatetime = now.strftime('%Y%m%d%H%M%S')
+    nowDatetime =  now.strftime('%Y-%m-%d %H:%M:%S'.encode('unicode-escape').decode())
     #c_time = request.values['time'] # 측정된 시간
     c_time =nowDatetime         # imsi 현재시간
     c_temp = request.values['temp'] # 온도

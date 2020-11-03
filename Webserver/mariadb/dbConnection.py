@@ -8,7 +8,7 @@ class dbConnection:
 
     # 온습도 저장
     def insertTemp( self , t_time, t_temp, t_humi ) :
-        sql = "INSERT INTO `temperature` ( t_time, t_temp, t_humi ) VALUES ( %s, %s, %s ) ;" % ( t_time, t_temp, t_humi ) 
+        sql = '''INSERT INTO `temperature` ( t_time, t_temp, t_humi ) VALUES ( "%s", %s, %s ) ;''' % ( t_time, t_temp, t_humi ) 
         self.curs.execute(sql)
         self.conn.commit()
 

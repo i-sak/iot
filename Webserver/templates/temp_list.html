@@ -17,16 +17,24 @@
 
         <table>
             <thead>
-                <th>TEMPERATURE & HUMIDITY</th>
+                <tr>
+                    <th colspan="3">TEMPERATURE & HUMIDITY</th>
+                </tr>
+                <tr>
+                    <th>일시</th>
+                    <th>온도</th>
+                    <th>습도</th>
+                </tr>
             </thead>
-        {% for row in rows %}
             <tbody>
-                <!--<td><img style="width:75px; height: 75px;" src="/static/cctv_img/{{row.cc_image}}"></td>-->
-                <td>{{row.t_time}}</td>
-                <td>{{row.t_temp}} C</td>
-                <td>{{row.t_humi}} %</td>
-            </tbody>
+        {% for row in rows %}
+                <tr>
+                    <td>{{row.t_time}} </td>
+                    <td>{{row.t_temp}} C</td>
+                    <td>{{row.t_humi}} %</td>
+                </tr>
         {% endfor %}
+            </tbody>    
         </table>
         
     </section>
