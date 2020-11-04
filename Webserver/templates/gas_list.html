@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GAS_LIST</title>
+
+    <link href="{{  url_for('static', filename='css/menu.css') }}" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <h3>GAS_LIST</h3>
+    </header>
+
+    <section>
+
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="3">GAS</th>
+                </tr>
+                <tr>
+                    <th>일시</th>
+                    <th>가스</th>
+                </tr>
+            </thead>
+            <tbody>
+        {% for row in rows %}
+                <tr>
+                    <td>{{row.g_time}} </td>
+                    <td>{{row.g_gas}} </td>
+                </tr>
+        {% endfor %}
+            </tbody>    
+        </table>
+        
+    </section>
+</body>
+</html>

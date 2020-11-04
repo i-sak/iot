@@ -21,6 +21,20 @@ class dbConnection:
         result = pd.DataFrame(result)
         return result
     
+    # 가스 저장
+    def insertGas( self , g_time, g_gas) :
+        sql = '''INSERT INTO `gas` ( g_time, g_gas ) VALUES ( "%s", %s ) ;''' % ( g_time, g_gas) 
+        self.curs.execute(sql)
+        self.conn.commit()
+
+    # 가스 전체 불러오기
+    def selectGas(self):
+        sql = "SELECT * FROM `gas` ORDER BY g_time DESC LIMIT 10;"
+        self.curs.execute(sql)
+        result = self.curs.fetchall()
+        result = pd.DataFrame(result)
+        return result
+
     # 회원가입
     def insertMember( self , memail, mname, mpassword ) :
         sql = '''INSERT INTO `member` ( m_email, m_name, m_password ) VALUES ( "%s", "%s", "%s" ) ;'''%( memail, mname, mpassword ) 

@@ -1,5 +1,5 @@
 
-from vo import cctvVo, tempVo
+from vo import cctvVo, tempVo, gasVo
 from flask import Flask, render_template, request
 from mariadb import dbConnection
 from emailService import sendEmail
@@ -10,10 +10,13 @@ import datetime
 app = Flask(__name__)	# Flask object Assign to app
 
 db = dbConnection.dbConnection(host='192.168.219.111', id='latte', pw='lattepanda', db_name='test')
-sessionId = ""
+
 slist = "isaac7263@naver.com, juhea0619@naver.com, itit2014@naver.com, rabbit3919@naver.com"
-cctvVo_list = [] # 임시 cctv 리스트에 데이터 추가
-tempVo_list = []  # 온습도 리스트에 데이터 추가
+
+# Vo LIST
+cctvVo_list = [] # 임시 cctv 리스트
+tempVo_list = []  # 온습도 리스트
+gasVo_list = [] #  가스 리스트
 
 def getIp() :
     return request.environ.get('HTTP_X_REAL_IP', request.remote_addr)
@@ -70,21 +73,14 @@ def cctv_list() :
     return render_template('cctv_list.html', rows=cctvVo_list)
 
 @app.route("/temp_list",  methods=['POST', 'GET'])
-def tempe_list() :
+def temp_list() :
 
     # database에서 값 꺼내기
-    db = dbConnection.dbConnection(host='192.168.219.111', id='latte', pw='lattepanda', db_name='test')
     dataFrame = db.selectTemp()
-    
     # converting to dict
     data_dict = dataFrame.to_dict()
 
-    # t_no
-    # t_time
-    # t_temp
-    # t_humi
     tempVo_list.clear()
-    print(  len(data_dict['t_time'] )  )
     
     for i in range( len( data_dict['t_time'] ) ) :
         obj = tempVo.tempVo(  data_dict['t_time'][ i ],  data_dict['t_temp'][ i ],  data_dict['t_humi'][ i ]  )
@@ -92,10 +88,21 @@ def tempe_list() :
     
     return render_template('temp_list.html', rows=tempVo_list)
 
-@app.route("/gas_page",  methods=['POST', 'GET'])
-def gas_page() :
-    _ip = getIp()
-    return render_template('menu.html', _ip=_ip)
+@app.route("/gas_list",  methods=['POST', 'GET'])
+def gas_list() :
+    
+    # database에서 값 꺼내기
+    dataFrame = db.selectGas()
+    # converting to dict
+    data_dict1 = dataFrame.to_dict()
+
+    gasVo_list.clear()
+
+    for i in range( len( data_dict1['g_time'] ) ) :
+        obj = gasVo.gasVo(  data_dict1['g_time'][ i ],  data_dict1['g_gas'][ i ]  )
+        gasVo_list.append(obj)
+        
+    return render_template('gas_list.html', rows=gasVo_list)
 
 @app.route("/dust_page",  methods=['POST', 'GET'])
 def dust_page() :
@@ -124,7 +131,7 @@ def insertCctv() :
 def insertTemp() :
     now = datetime.datetime.now()
     nowDatetime =  now.strftime('%Y-%m-%d %H:%M:%S'.encode('unicode-escape').decode())
-    #c_time = request.values['time'] # 측정된 시간
+    
     c_time =nowDatetime         # imsi 현재시간
     c_temp = request.values['temp'] # 온도
     c_hum = request.values['hum'] # 습도
@@ -146,8 +153,8 @@ def insertTemp() :
 @app.route("/insertGas", methods=['POST','GET'])
 def insertGas() :
     now = datetime.datetime.now()
-    nowDatetime = now.strftime('%Y%m%d%H%M%S')
-    #c_time = request.values['time'] # 측정된 시간
+    nowDatetime =  now.strftime('%Y-%m-%d %H:%M:%S'.encode('unicode-escape').decode())
+    
     c_time =nowDatetime         # imsi 현재시간
     c_gas = request.values["gas"]
     c_sig1 = request.values['flag1'] #main sensor
@@ -166,6 +173,7 @@ def insertGas() :
     elif c_sig2 =="2" :
         sendEmail.sendEmail("S:[Gas]가스 누출 서브센서 감지", "C:[Gas]가스 누출 서브센서 감지")
 
+    db.insertGas(c_time, c_gas)
     return ""
 #--------------------------------------------------------------------
 
