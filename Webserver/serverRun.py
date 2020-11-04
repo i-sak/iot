@@ -1,4 +1,3 @@
-
 from vo import cctvVo, tempVo, gasVo
 from flask import Flask, render_template, request
 from mariadb import dbConnection
@@ -6,6 +5,19 @@ from emailService import sendEmail
 import os
 import datetime
 
+import asyncio
+import websockets   # pip install websockets
+import cv2, base64  # python
+import numpy as np
+
+async def accept(websocket, path) :
+    while True : 
+        data = await websocket.recv()
+        print(data)
+
+#server = websockets.serve(accept, "0.0.0.0", 8080)
+#asyncio.get_event_loop().run_until_complete(server)
+#asyncio.get_event_loop().run_forever()
 
 app = Flask(__name__)	# Flask object Assign to app
 
@@ -109,6 +121,12 @@ def dust_page() :
     _ip = getIp()
     return render_template('menu.html', _ip=_ip)
 
+@app.route("/test",  methods=['POST', 'GET'])
+def test() :
+    _ip = getIp()
+    return render_template('menu.html', _ip=_ip)
+
+
 #--------------------------------------------------------------------
 # From CCTV client / insert
 @app.route("/insertCctv", methods=['POST', 'GET'])
@@ -175,8 +193,8 @@ def insertGas() :
 
     db.insertGas(c_time, c_gas)
     return ""
-#--------------------------------------------------------------------
 
+#--------------------------------------------------------------------
 host_addr = "0.0.0.0"
 port_num = "8080"
 if __name__ == "__main__":
