@@ -19,6 +19,7 @@ db = dbConnection.dbConnection(host='192.168.219.111', id='latte', pw='lattepand
 slist = "isaac7263@naver.com, juhea0619@naver.com, itit2014@naver.com, rabbit3919@naver.com"
 
 #
+"""
 async def accept(websocket, path) :
     while True : 
         data = await websocket.recv()
@@ -27,6 +28,7 @@ async def accept(websocket, path) :
 server = websockets.serve(accept, "0.0.0.0", 8080)
 asyncio.get_event_loop().run_until_complete(server)
 asyncio.get_event_loop().run_forever()
+"""
 #
 
 # Vo LIST
@@ -159,14 +161,21 @@ def insertTemp() :
     c_sig1 = request.values['sig1'] #main sensor
     c_sig2 = request.values['sig2'] #sub sensor
 
+    subject = ""
+    content = ""
     # 이상감지
-    print(c_sig1, c_sig2)
     if c_sig1 == "0" and c_sig2 == "1":
-        sendEmail.sendEmail("S:[온습도]메인센서 이상", "C:[온습도]메인센서 이상")
+        subject = "[온습도]메인센서 이상, 서브센서로 감지합니다."
+        content = "[온습도]메인센서 이상, 서브센서로 감지합니다. \n현재 온도 : [%s], 습도 : [%s] 입니다." % (c_temp, c_hum) 
+        sendEmail.sendEmail( subject, content )
     elif c_sig1 == "1"  and c_sig2 == "0" :
-        sendEmail.sendEmail("S:[온습도]서브센서 이상", "C:[온습도]서브센서 이상")
+        subject = "[온습도]서브센서 이상, 메인센서로 감지합니다."
+        content = "[온습도]서브센서 이상, 메인센서로 감지합니다.. \n현재 온도 : [%s], 습도 : [%s] 입니다." % (c_temp, c_hum) 
+        sendEmail.sendEmail( subject, content )
     elif c_sig1 == "0" and c_sig2 == "0" :
-        sendEmail.sendEmail("S:[온습도]메인센서, 서브센서 이상", "C:[온습도]메인센서, 서브센서 이상")
+        subject = "온습도]메인센서, 서브센서 이상 센서를 점검하세요."
+        content = "[온습도]메인센서, 서브센서 이상, 센서를 점검하세요. "
+        sendEmail.sendEmail( subject, content)
 
     db.insertTemp(c_time, c_temp, c_hum)
     return ""
@@ -181,18 +190,29 @@ def insertGas() :
     c_sig1 = request.values['flag1'] #main sensor
     c_sig2 = request.values['flag2'] #sub sensor
 
+    subject=""
+    content=""
     # 이상감지
-    print(c_sig1, c_sig2)
-    if c_sig1 == "0" and c_sig2 == "1":
-        sendEmail.sendEmail("S:[Gas]메인센서 이상", "C:[Gas]메인센서 이상")
+    if c_sig1 == "0" and c_sig2 == "1":    
+        subject="[Gas]메인센서 이상, 서브센서로 감지합니다."
+        content="[Gas]메인센서 이상, 서브센서로 감지합니다. 현재 가스 : [%s] "% c_gas
+        sendEmail.sendEmail(subject, content)
     elif c_sig1 == "1"  and c_sig2 == "0" :
-        sendEmail.sendEmail("S:[Gas]서브센서 이상", "C:[Gas]서브센서 이상")
+        subject="[Gas]서브센서 이상, 메인센서로 감지합니다."
+        content="[Gas]서브센서 이상, 메인센서로 감지합니다. 현재 가스 : [%s] "% c_gas
+        sendEmail.sendEmail(subject, content)
     elif c_sig1 == "0" and c_sig2 == "0" :
-        sendEmail.sendEmail("S:[Gas]메인센서, 서브센서 이상", "C:[Gas]메인센서, 서브센서 이상")
+        subject="[Gas]메인센서 이상, 서브센서 이상 | 센서를 점검하세요!"
+        content="[Gas]메인센서 이상, 서브센서 이상 | 센서를 점검하세요!"
+        sendEmail.sendEmail(subject, content)
     elif c_sig1 =="2" :
-        sendEmail.sendEmail("S:[Gas]가스 누출 메인센서 감지", "C:[Gas]가스 누출 메인센서 감지")
+        subject="[Gas]가스 누출을 메인센서로 감지했습니다."
+        content="[Gas]가스 누출을 메인센서로 감지했습니다.\n현재 가스 : [%s] "% c_gas
+        sendEmail.sendEmail(subject, content)
     elif c_sig2 =="2" :
-        sendEmail.sendEmail("S:[Gas]가스 누출 서브센서 감지", "C:[Gas]가스 누출 서브센서 감지")
+        subject="[Gas]가스 누출을 서브센서로 감지했습니다."
+        content="[Gas]가스 누출을 서브센서로 감지했습니다\n현재 가스 : [%s] "% c_gas
+        sendEmail.sendEmail(subject, content)
 
     db.insertGas(c_time, c_gas)
     return ""
