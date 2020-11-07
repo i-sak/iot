@@ -59,7 +59,7 @@ def signupInsert():
 
     print(_id, _name, _password)
     # 회원가입
-    db = dbConnection.dbConnection(host='192.168.219.111', id='latte', pw='lattepanda', db_name='test')
+    #db = dbConnection.dbConnection(host='192.168.219.111', id='latte', pw='lattepanda', db_name='test')
     db.insertMember( _id, _name, _password )
     return render_template('index.html')
 
@@ -74,6 +74,7 @@ def siginin() :
         _password = request.form.get('_password')
         _ip = getIp()
 
+        print("로그인 시도하는 ID & PW", _id, _password)
         result = db.selectLoginMember(_id, _password)
         print(result[0]['COUNT(*)'])
         if ( result[0]['COUNT(*)'] == 1 ) :
