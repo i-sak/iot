@@ -12,7 +12,7 @@ async def accept(websocket, path):
         #print("recv : " + data)
         #await websocket.send("echo : " + data)
 
-server = websockets.serve(accept, "localhost", 9999)
+server = websockets.serve(accept, "0.0.0.0", 9999)
 
 asyncio.get_event_loop().run_until_complete(server)
 asyncio.get_event_loop().run_forever()

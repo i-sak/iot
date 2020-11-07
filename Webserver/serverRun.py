@@ -10,20 +10,24 @@ import websockets   # pip install websockets
 import cv2, base64  # python
 import numpy as np
 
-async def accept(websocket, path) :
-    while True : 
-        data = await websocket.recv()
-        print(data)
 
-#server = websockets.serve(accept, "0.0.0.0", 8080)
-#asyncio.get_event_loop().run_until_complete(server)
-#asyncio.get_event_loop().run_forever()
 
 app = Flask(__name__)	# Flask object Assign to app
 
 db = dbConnection.dbConnection(host='192.168.219.111', id='latte', pw='lattepanda', db_name='test')
 
 slist = "isaac7263@naver.com, juhea0619@naver.com, itit2014@naver.com, rabbit3919@naver.com"
+
+#
+async def accept(websocket, path) :
+    while True : 
+        data = await websocket.recv()
+        print(data)
+
+server = websockets.serve(accept, "0.0.0.0", 8080)
+asyncio.get_event_loop().run_until_complete(server)
+asyncio.get_event_loop().run_forever()
+#
 
 # Vo LIST
 cctvVo_list = [] # 임시 cctv 리스트
@@ -123,9 +127,8 @@ def dust_page() :
 
 @app.route("/test",  methods=['POST', 'GET'])
 def test() :
-    _ip = getIp()
-    return render_template('menu.html', _ip=_ip)
-
+    print("[[[TEST]]]")
+    return ""
 
 #--------------------------------------------------------------------
 # From CCTV client / insert
@@ -199,3 +202,5 @@ host_addr = "0.0.0.0"
 port_num = "8080"
 if __name__ == "__main__":
     app.run(host=host_addr, port=port_num, debug=True)
+    
+
