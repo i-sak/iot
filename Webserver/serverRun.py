@@ -14,7 +14,7 @@ import numpy as np
 
 app = Flask(__name__)	# Flask object Assign to app
 
-#db = dbConnection.dbConnection(host='192.168.219.111', id='latte', pw='lattepanda', db_name='test')
+db = dbConnection.dbConnection(host='192.168.219.111', id='latte', pw='lattepanda', db_name='test')
 
 slist = "isaac7263@naver.com, juhea0619@naver.com, itit2014@naver.com, rabbit3919@naver.com"
 
@@ -101,8 +101,8 @@ def cctv_list() :
     # converting to dict
     data_dict = dataFrame.to_dict()
 
-    cctv_list.clear()
-
+    cctvVo_list.clear()
+    print(len(data_dict['c_time']))
     for i in range( len( data_dict['c_time'] ) ) :
         obj = cctvVo.cctvVo( data_dict['c_time'][i] , data_dict['c_image'][ i ])
         cctvVo_list.append(obj)
