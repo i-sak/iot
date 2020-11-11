@@ -76,7 +76,9 @@ def siginin() :
 
         print("로그인 시도하는 ID & PW", _id, _password)
         result = db.selectLoginMember(_id, _password)
-        print(result[0]['COUNT(*)'])
+        print(result)
+        return render_template('menu.html', _ip=_ip)
+        
         if ( result[0]['COUNT(*)'] == 1 ) :
             return render_template('menu.html', _ip=_ip)
         else :
@@ -155,7 +157,8 @@ def dust_page() :
 # From CCTV client / insert
 @app.route("/insertCctv", methods=['POST', 'GET'])
 def insertCctv() :
-
+    #now = datetime.datetime.now()
+    #nowDatetime =  now.strftime('%Y-%m-%d %H:%M:%S'.encode('unicode-escape').decode())
     c_time = request.values['time'] # 측정 시간
     c_image = request.files['image']  # 이미지 
 
