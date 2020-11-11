@@ -39,7 +39,7 @@ a.menuHomeButton {
     padding: 25px;
     border: 1px solid lightgray;
     background-color: aliceblue;
-    border-radius: 35%;
+    border-radius: 50%;
     transition: background-color 0.5s, color 0.5s;
 }
 a.menuHomeButton:hover{
