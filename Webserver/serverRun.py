@@ -78,7 +78,7 @@ def siginin() :
         result = db.selectLoginMember(_id, _password)
         print(result)
         return render_template('menu.html', _ip=_ip)
-        
+
         if ( result[0]['COUNT(*)'] == 1 ) :
             return render_template('menu.html', _ip=_ip)
         else :
