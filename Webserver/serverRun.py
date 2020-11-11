@@ -169,7 +169,9 @@ def insertCctv() :
     # 디비에 저장하기 이전 버전
     #instance = cctvVo.cctvVo(c_time, imageFileName)   # 객체에 저장
     #cctvVo_list.append(instance)
-
+    subject = "[카메라]사람이 감지되었습니다."
+    content = "[카메라]사람이 감지되었습니다."
+    sendEmail.sendEmail( subject, content )
     # db에 저장
     db.insertCctv(c_time, imageFileName)
     return ""
