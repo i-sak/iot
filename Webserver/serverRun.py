@@ -14,7 +14,7 @@ import numpy as np
 
 app = Flask(__name__)	# Flask object Assign to app
 
-db = dbConnection.dbConnection(host='192.168.219.111', id='latte', pw='lattepanda', db_name='test')
+#db = dbConnection.dbConnection(host='192.168.219.111', id='latte', pw='lattepanda', db_name='test')
 
 slist = "isaac7263@naver.com, juhea0619@naver.com, itit2014@naver.com, rabbit3919@naver.com"
 
@@ -81,6 +81,12 @@ def siginin() :
             return render_template('menu.html', _ip=_ip)
         else :
             return render_template('index.html')
+
+# menu Home 
+@app.route("/menuHome",  methods=['POST', 'GET'])
+def menuHome() :
+    _ip = getIp()
+    return render_template('menu.html', _ip=_ip)
 
 
 #--------------------------------------------------------------------

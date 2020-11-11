@@ -30,7 +30,22 @@ section .iot_button:hover {
 
 a:active, a:link, a:visited{text-decoration: none; color:black;}
 
-
+/* 메뉴 홈 버튼 */
+a.menuHomeButton {
+    text-align: center;
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    padding: 25px;
+    border: 1px solid lightgray;
+    background-color: aliceblue;
+    border-radius: 35%;
+    transition: background-color 0.5s, color 0.5s;
+}
+a.menuHomeButton:hover{
+    background-color: #1c89fd;
+    color :white;
+}
 /* list page */
 section table{
     margin: 0 auto;
