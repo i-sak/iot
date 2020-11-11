@@ -20,7 +20,7 @@ def draw_rects(img, rects, color):
 
 # url cctv 값 보내기
 # http://122.43.56.49:8080/insertCctv
-cctv_url = "http://192.168.219.116:8080/insertCctv"
+cctv_url = "http://192.168.219.111:8080/insertCctv"
 
 # initialize the camera and grab a reference to the raw camera capture
 camera = PiCamera()
