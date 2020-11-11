@@ -49,6 +49,16 @@ class dbConnection:
         #result = pd.DataFrame(result)
         return result
 
+    #cctv 저장하기 
+    def insertCctv(self, c_time, c_image) :
+        sql = """INSERt INTO `camera` ( c_time, c_image ) VALUES ("%s", "%s") ; """%(c_time, c_image )
 
+    #cctv 불러오기
+    def selectCctv(self) :
+        sql = "SELECT * FROM `camera` ORDER BY c_time DESC LIMIT 10;"
+        self.curs.execute(sql)
+        result = self.curs.fetchall()
+        result = pd.DataFrame(result)
+        return result
         
 

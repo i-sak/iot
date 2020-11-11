@@ -19,6 +19,7 @@ def draw_rects(img, rects, color):
         cv2.rectangle(img, (x1, y1), (x2, y2), color, 2)
 
 # url cctv 값 보내기
+# http://122.43.56.49:8080/insertCctv
 cctv_url = "http://192.168.219.116:8080/insertCctv"
 
 # initialize the camera and grab a reference to the raw camera capture
@@ -57,12 +58,10 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         print('사람인식')
 
         cv2.imshow('capFrame', img) # 윈도우 프레임에 보임
-        # print('img:', img)
-        # print('img type:', type(img))
         cv2.imwrite('temp.jpg', img) # image 저장하기
 
-        files = {'media' : open('temp.jpg', 'rb')}
-        params = {'is':1, 'time':time.strftime('%Y년%m월%d일%H시%M분%S초')}
+        params = {'time':time.strftime('%Y%m%d%H%M%S')}
+        files = {'image' : open('temp.jpg', 'rb')}
 
         try:
             requests.post(url=cctv_url, data=params, files=files, timeout=10)

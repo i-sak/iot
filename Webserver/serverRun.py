@@ -89,6 +89,18 @@ def siginin() :
 # cctv_list page
 @app.route("/cctv_list",  methods=['POST', 'GET'])
 def cctv_list() :
+
+    # database에서 값 꺼내기
+    dataFrame = db.selectCctv()
+    # converting to dict
+    data_dict = dataFrame.to_dict()
+
+    cctv_list.clear()
+
+    for i in range( len( data_dict['c_time'] ) ) :
+        obj = cctvVo.cctvVo( data_dict['c_time'][i] , data_dict['c_image'][ i ])
+        cctvVo_list.append(obj)
+
     return render_template('cctv_list.html', rows=cctvVo_list)
 
 @app.route("/temp_list",  methods=['POST', 'GET'])
@@ -128,26 +140,24 @@ def dust_page() :
     _ip = getIp()
     return render_template('menu.html', _ip=_ip)
 
-@app.route("/test",  methods=['POST', 'GET'])
-def test() :
-    print("[[[TEST]]]")
-    return ""
-
 #--------------------------------------------------------------------
 # From CCTV client / insert
 @app.route("/insertCctv", methods=['POST', 'GET'])
 def insertCctv() :
-    request.values['is']    # 테스트
 
-    current_time = request.values['time'] # 측정 시간
-    current_img = request.files['media']  # 이미지 
+    c_time = request.values['time'] # 측정 시간
+    c_image = request.files['image']  # 이미지 
 
     # image 파일 저장
-    imageFileName = current_time + '.jpg'
-    current_img.save(os.path.join( 'static/cctv_img/', imageFileName)) # 파일 저장
+    imageFileName = c_time + '.jpg'
+    c_image.save(os.path.join( 'static/cctv_img/', imageFileName)) # 파일 저장
     
-    instance = cctvVo.cctvVo(current_time, imageFileName)   # 객체에 저장
-    cctvVo_list.append(instance)
+    # 디비에 저장하기 이전 버전
+    #instance = cctvVo.cctvVo(c_time, imageFileName)   # 객체에 저장
+    #cctvVo_list.append(instance)
+
+    # db에 저장
+    db.insertCctv(c_time, imageFileName)
     return ""
 
 # From Temperature/Humidity 온습도 클라이언트로부터의 값 얻어서 넣기
