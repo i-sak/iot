@@ -102,10 +102,15 @@ def cctv_list() :
     data_dict = dataFrame.to_dict()
 
     cctvVo_list.clear()
-    print(len(data_dict['c_time']))
-    for i in range( len( data_dict['c_time'] ) ) :
-        obj = cctvVo.cctvVo( data_dict['c_time'][i] , data_dict['c_image'][ i ])
+    
+    print( len(data_dict['c_time']) )
+    for i in range( len(data_dict['c_time'] )) :
+        obj = cctvVo.cctvVo(data_dict['c_time'][i], data_dict['c_image'][i])
         cctvVo_list.append(obj)
+
+    #for i in range( len( data_dict['c_time'] ) ) :
+        #obj = cctvVo.cctvVo( data_dict['c_time'][i] , data_dict['c_image'][ i ])
+        #cctvVo_list.append(obj)
 
     return render_template('cctv_list.html', rows=cctvVo_list)
 

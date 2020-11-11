@@ -46,12 +46,14 @@ class dbConnection:
         sql = """SELECT COUNT(*) FROM `member` WHERE m_email = "%s" AND m_password = "%s" ;"""% (memail, mpassword)
         self.curs.execute(sql)
         result = self.curs.fetchall()
-        #result = pd.DataFrame(result)
+        result = pd.DataFrame(result)
         return result
 
     #cctv 저장하기 
     def insertCctv(self, c_time, c_image) :
         sql = """INSERt INTO `camera` ( c_time, c_image ) VALUES ("%s", "%s") ; """%(c_time, c_image )
+        self.curs.execute(sql)
+        self.conn.commit()
 
     #cctv 불러오기
     def selectCctv(self) :
