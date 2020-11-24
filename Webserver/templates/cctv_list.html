@@ -14,19 +14,26 @@
     </header>
 
     <section>
-
         <table>
             <thead>
-                <th>CCTV</th>
+                <tr>
+                    <th colspan="2">CCTV</th>
+                </tr>
+                <tr>
+                    <th>일시</th>
+                    <th>얼굴 인식한 이미지</th>
+                </tr>
             </thead>
-        {% for row in rows %}
             <tbody>
-                <td><img style="width:75px; height: 75px;" src="/static/cctv_img/{{row.cc_image}}"></td>
-                <td>{{row.cc_time}}</td>
+                {% for row in rows %}
+                <tr>
+                    <td>{{row.c_time}}</td>
+                    <td><img style="width:75px; height: 75px;" src="/static/cctv_img/{{row.c_image}}"></td>
+                </tr>
+                {% endfor %}
             </tbody>
-        {% endfor %}
         </table>
-        
     </section>
+    <a href="/menuHome" class="menuHomeButton">Home</a>
 </body>
 </html>
