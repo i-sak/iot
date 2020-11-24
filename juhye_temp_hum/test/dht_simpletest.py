@@ -34,7 +34,8 @@ while True:
         
     except RuntimeError as error:
         # Errors happen fairly often, DHT's are hard to read, just keep going
-        print(error.args[0])
+        pass
+        #print(error.args[0])
         time.sleep(2.0)
         continue
     
